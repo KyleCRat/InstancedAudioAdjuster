@@ -13,9 +13,11 @@ IAA.defaults = {
         arena    = { master = nil, music = nil, sfx = nil, ambience = nil, dialog = nil },
         pvp      = { master = nil, music = nil, sfx = nil, ambience = nil, dialog = nil },
         none     = { master = nil, music = nil, sfx = nil, ambience = nil, dialog = nil },
+        interior = { master = nil, music = nil, sfx = nil, ambience = nil, dialog = nil },
+        neighborhood = { master = nil, music = nil, sfx = nil, ambience = nil, dialog = nil },
     },
-    order = { 
-        instanceTypes = { "none", "party", "raid", "scenario", "arena", "pvp" },
+    order = {
+        instanceTypes = { "none", "party", "raid", "scenario", "arena", "pvp", "interior", "neighborhood" },
         channels = { "master", "music", "sfx", "ambience", "dialog" }
     }
 }
@@ -104,8 +106,8 @@ end
 
 function IAA:CreateOptionsPanel()
     self.category, self.layout = Settings.RegisterVerticalLayoutCategory(IAA.name);
-    
-    do 
+
+    do
         local name = "Verbose"
         local variable = "IAA_verbose"
         local defaultValue = IAA.db.verbose or true
@@ -166,11 +168,11 @@ function IAA:InitDB()
         )
     end
 
-    for instanceType, _ in pairs(IAA.defaults.instanceTypes) do 
-        if IAA.db.instanceTypes[instanceType] == nil or next(IAA.db.instanceTypes[instanceType]) == nil then 
+    for instanceType, _ in pairs(IAA.defaults.instanceTypes) do
+        if IAA.db.instanceTypes[instanceType] == nil or next(IAA.db.instanceTypes[instanceType]) == nil then
             IAA.db.instanceTypes[instanceType] = {}
             self:setDefaultsToCurrentCVARS(instanceType)
-        end 
+        end
     end
 end
 
@@ -215,7 +217,7 @@ IAA.frame:SetScript("OnEvent", function(self, event, arg1, ...)
             IAA.loaded = true
             IAA.PrintInfo("Type /iaa for options. |c00666666(Turn off these messages by unchecking 'Verbose')|r")
         end
-        
+
     elseif event == "PLAYER_ENTERING_WORLD" or event == "ZONE_CHANGED_NEW_AREA" then
         if IAA.loaded then
             self:DoUpdate()
