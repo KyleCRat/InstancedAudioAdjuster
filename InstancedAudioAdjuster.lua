@@ -87,7 +87,9 @@ function IAA.CreateAudioSlider(category, db, instanceType, channel)
         )
 
         local options = Settings.CreateSliderOptions(minValue, maxValue, step)
-        options:SetLabelFormatter(MinimalSliderWithSteppersMixin.Label.Right);
+        options:SetLabelFormatter(MinimalSliderWithSteppersMixin.Label.Right, function(value)
+            return string.format("%.2f", value)
+        end);
         Settings.CreateSlider(category, setting, options, tooltip)
     end
 end
@@ -208,11 +210,9 @@ function IAA.frame:DoUpdate()
     IAA.CheckInstanceType(instanceType)
 end
 
-IAA.frame:SetScript("OnEvent", function(self, event, arg1, ...)
+IAA.frame:SetScript("OnEvent", function(self, event, addon, ...)
     if event == "ADDON_LOADED" then
-        local name = arg1
-
-        if name == "InstancedAudioAdjuster" then
+        if addon == "InstancedAudioAdjuster" then
             IAA:Init()
             IAA.loaded = true
             IAA.PrintInfo("Type /iaa for options. |c00666666(Turn off these messages by unchecking 'Verbose')|r")
