@@ -2,7 +2,7 @@
 ## Title: Instanced Audio Adjuster
 ## Notes: Automatically adjusts audio levels based on instance type.
 ## Author: Yvairel
-## Version: 12.0.1-1
+## Version: 12.0.1-2
 ## SavedVariables: InstancedAudioAdjusterDB
 
 InstancedAudioAdjuster.lua
