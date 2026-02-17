@@ -170,7 +170,7 @@ local function CreateAudioSlider(category, instanceType, channel)
 
     local options = Settings.CreateSliderOptions(0, 1, step)
     options:SetLabelFormatter(MinimalSliderWithSteppersMixin.Label.Right, function(value)
-        return string.format("%.2f", value)
+        return string.format("%d%%", value * 100)
     end)
     Settings.CreateSlider(category, setting, options, tooltip)
 end
