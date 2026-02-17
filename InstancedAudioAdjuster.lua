@@ -34,14 +34,14 @@ IAA.name = "Instanced Audio Adjuster"
 IAA.defaults = {
     verbose = true,
     instanceTypes = {
-        party        = {},
-        raid         = {},
-        scenario     = {},
-        arena        = {},
-        pvp          = {},
-        none         = {},
-        interior     = {},
-        neighborhood = {},
+        none         = { master = 0.35, music = 0.0, sfx = 0.1,  ambience = 0.15, dialog = 0.2 },
+        party        = { master = 0.75, music = 0.0, sfx = 0.05, ambience = 0.0,  dialog = 0.2 },
+        raid         = { master = 0.75, music = 0.0, sfx = 0.05, ambience = 0.0,  dialog = 0.2 },
+        scenario     = { master = 0.75, music = 0.3, sfx = 0.25, ambience = 0.25, dialog = 0.2 },
+        arena        = { master = 0.75, music = 0.0, sfx = 0.25, ambience = 0.0,  dialog = 0.25 },
+        pvp          = { master = 0.75, music = 0.0, sfx = 0.25, ambience = 0.0,  dialog = 0.25 },
+        interior     = { master = 0.35, music = 0.2, sfx = 0.25, ambience = 0.25, dialog = 0.3 },
+        neighborhood = { master = 0.35, music = 0.2, sfx = 0.25, ambience = 0.25, dialog = 0.3 },
     },
     order = {
         instanceTypes = { "none", "party", "raid", "scenario", "arena", "pvp", "interior", "neighborhood" },
@@ -141,7 +141,7 @@ local function CreateAudioSlider(category, instanceType, channel)
     local info         = INSTANCE_TYPE_INFO[instanceType]
     local channelLabel = CHANNEL_LABELS[channel]
     local name         = info.name .. " " .. channelLabel
-    local defaultValue = tonumber(IAA.db.instanceTypes[instanceType][channel]) or 0
+    local defaultValue = tonumber(IAA.defaults.instanceTypes[instanceType][channel]) or 0
     local variable     = instanceType .. "_" .. channel
     local step         = 0.05
     local tooltip      = "Adjust the " .. channelLabel .. " volume for " .. info.name
