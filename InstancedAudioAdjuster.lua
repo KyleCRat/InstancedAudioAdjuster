@@ -6,6 +6,25 @@ local CHANNEL_CVARS = {
     dialog   = "Sound_DialogVolume",
 }
 
+local CHANNEL_LABELS = {
+    master   = "Master",
+    music    = "Music",
+    sfx      = "SFX",
+    ambience = "Ambience",
+    dialog   = "Dialog",
+}
+
+local INSTANCE_TYPE_INFO = {
+    none         = { name = "Open World",   description = "Active while exploring the open world, questing, or in capital cities." },
+    party        = { name = "Dungeon",      description = "Active inside 5-player dungeons." },
+    raid         = { name = "Raid",         description = "Active inside raid instances (Flex: 10-30, Mythic: 20, Classic: 40, 25, 10)." },
+    scenario     = { name = "Scenario",     description = "Active during scenarios and solo story instances." },
+    arena        = { name = "Arena",        description = "Active during arena matches (2v2, 3v3, solo shuffle)." },
+    pvp          = { name = "Battleground", description = "Active inside battlegrounds and epic battlegrounds." },
+    interior     = { name = "Interior",     description = "Active in Neighborhood home interiors." },
+    neighborhood = { name = "Neighborhood", description = "Active in Neighborhood outdoor areas." },
+}
+
 -----------------------------------------------------------
 -- Addon Table & Defaults
 -----------------------------------------------------------
@@ -119,11 +138,13 @@ local function ApplyOptionChange(cfgInstanceType)
 end
 
 local function CreateAudioSlider(category, instanceType, channel)
-    local name         = instanceType .. " " .. channel
+    local info         = INSTANCE_TYPE_INFO[instanceType]
+    local channelLabel = CHANNEL_LABELS[channel]
+    local name         = info.name .. " " .. channelLabel
     local defaultValue = tonumber(IAA.db.instanceTypes[instanceType][channel]) or 0
     local variable     = instanceType .. "_" .. channel
     local step         = 0.05
-    local tooltip      = "Adjust " .. instanceType .. ":" .. channel
+    local tooltip      = "Adjust the " .. channelLabel .. " volume for " .. info.name
 
     local function GetValue()
         return tonumber(IAA.db.instanceTypes[instanceType][channel])
@@ -181,9 +202,8 @@ local function CreateOptionsPanel()
     CreateVerboseCheckbox(IAA.category)
 
     for _, instanceType in ipairs(IAA.defaults.order.instanceTypes) do
-        local name = "Instance Type: " .. instanceType
-        local tooltip = "Change the audio settings for " .. instanceType
-        local headerInitializer = CreateSettingsListSectionHeaderInitializer(name, tooltip)
+        local info = INSTANCE_TYPE_INFO[instanceType]
+        local headerInitializer = CreateSettingsListSectionHeaderInitializer(info.name, info.description)
         IAA.layout:AddInitializer(headerInitializer)
 
         for _, channel in ipairs(IAA.defaults.order.channels) do
