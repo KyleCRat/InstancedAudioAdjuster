@@ -29,7 +29,7 @@ local INSTANCE_TYPE_INFO = {
 -- Addon Table & Defaults
 -----------------------------------------------------------
 
-IAA = {}
+local ADDON_NAME, IAA = ...
 IAA.name = "Instanced Audio Adjuster"
 IAA.defaults = {
     verbose = true,
