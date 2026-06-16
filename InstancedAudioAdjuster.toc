@@ -1,8 +1,8 @@
-## Interface: 120001, 120005
+## Interface: 120005, 120007
 ## Title: Instanced Audio Adjuster
 ## Notes: Automatically adjusts audio levels based on instance type.
 ## Author: Yvairel
-## Version: 12.0.5-4
+## Version: 12.0.7-5
 ## SavedVariables: InstancedAudioAdjusterDB
 
 InstancedAudioAdjuster.lua
