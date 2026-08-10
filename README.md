@@ -1,10 +1,21 @@
-### **Instanced Audio Adjuster**
+# Instanced Audio Adjuster
 
-**Instanced Audio Adjuster** automatically changes your audio levels to pre-defined settings per instance type. Perfect for players who want louder boss mechanics in raids, quieter ambience in the world, or tailored audio profiles for competitive PvP.
+Instanced Audio Adjuster automatically applies separate audio settings for each type of content, making it easy to emphasize encounter sounds in raids, quiet the open world, or tailor audio for PvP.
 
-**Features:**
+## Features
 
-*   Automatically adjusts audio levels when entering any instance type
-*   Independent volume profiles for Raids, Dungeons, PvP, Scenarios, Neighborhoods, and Open world
-*   Configuration panel via (`/iaa`)
-*   Verbose mode to show when settings are changing
+- Automatically switches profiles when entering the open world, dungeons, raids, scenarios, arenas, battlegrounds, Neighborhood interiors, and Neighborhood outdoor areas
+- Independent Master, Music, SFX, Ambience, and Dialog volume controls for every profile
+- Immediate audio updates when editing the profile for your current location
+- Optional chat messages when a profile is applied
+- Account-wide settings
+
+## Usage
+
+Open the addon settings with `/iaa`. On first run, every profile is initialized from your current game audio settings; adjust each profile from the addon panel afterward.
+
+Use `/iaa verbose` or `/iaa v` to toggle profile-change messages directly.
+
+## Compatibility
+
+Supports World of Warcraft Retail 12.1.0.
