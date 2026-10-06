@@ -18,4 +18,4 @@ Use `/iaa verbose` or `/iaa v` to toggle profile-change messages directly.
 
 ## Compatibility
 
-Supports World of Warcraft Retail 12.1.0.
+Supports World of Warcraft Retail 12.1.5.
